@@ -1,5 +1,9 @@
 const App = () => {
-  return <div>WELCOME TO CHAT BOT</div>;
+  return (
+    <div className="header">
+      <h2>ASalam o alkum</h2>
+    </div>
+  );
 };
 
 export default App;
