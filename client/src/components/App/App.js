@@ -1,5 +1,5 @@
 const App = () => {
-  return <div>WELCOME TO CHAT BOT FROM HASSAM</div>;
+  return <div>WELCOME TO CHAT BOT</div>;
 };
 
 export default App;
