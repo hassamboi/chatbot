@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 
 // controller to register a user
 const user_register = (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { name, email, password } = req.body;
 
   // check if the email is already registered
   User.findOne({ email }).then(user => {
@@ -11,8 +11,7 @@ const user_register = (req, res) => {
 
     // else create new instance of user for registration
     const newUser = new User({
-      firstName,
-      lastName,
+      name,
       email,
       password,
     });
@@ -29,8 +28,7 @@ const user_register = (req, res) => {
           res.json({
             user: {
               id: user.id,
-              firstName: user.firstName,
-              lastName: user.lastName,
+              name: user.name,
               email: user.email,
             },
           })
