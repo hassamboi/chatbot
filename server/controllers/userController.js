@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 // controller to register a user
 const user_register = (req, res) => {
@@ -24,22 +25,63 @@ const user_register = (req, res) => {
         newUser.password = hash;
 
         // register the user and return the data as response
-        newUser.save().then(user =>
-          res.json({
-            user: {
-              id: user.id,
-              name: user.name,
-              email: user.email,
-            },
-          })
-        );
+        newUser.save().then(user => {
+          jwt.sign(
+            { id: user.id },
+            process.env.JWT_SECRET,
+            { expiresIn: 3600 },
+            (err, token) => {
+              if (err) throw err;
+
+              res.json({
+                token,
+                user: {
+                  id: user.id,
+                  name: user.name,
+                  email: user.email,
+                },
+              });
+            }
+          );
+        });
       });
     });
   });
 };
 
-// controller to log an already registered user in
-const user_login = (req, res) => {};
+// controller to authenticate and log in a user
+const user_login = (req, res) => {
+  const { name, email, password } = req.body;
+
+  // check if the email is already registered
+  User.findOne({ email }).then(user => {
+    if (!user) return res.status(409).json({ msg: "User does not exist" });
+
+    // validate password sent by the client
+    bcrypt.compare(password, user.password).then(isMatch => {
+      if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
+
+      // generate token and send payload with token as a response back
+      jwt.sign(
+        { id: user.id },
+        process.env.JWT_SECRET,
+        { expiresIn: 3600 },
+        (err, token) => {
+          if (err) throw err;
+
+          res.json({
+            token,
+            user: {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+            },
+          });
+        }
+      );
+    });
+  });
+};
 
 // exporting the controllers
 module.exports = {

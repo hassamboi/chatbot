@@ -9,8 +9,11 @@ const bp = require("body-parser");
 
 // express app
 const app = express();
+
+// PORT to run the app on (default = 5000)
 const PORT = process.env.PORT || 5000;
 
+// get the Mongo URI connection string
 const db = process.env.MONGO_URI;
 
 // connecting to db
@@ -31,3 +34,6 @@ app.use(bp.urlencoded({ extended: false }));
 
 // handle user routes
 app.use("/users", require("./routes/userRoutes"));
+
+// handle chat routes
+app.use("/chat", require("./routes/chatRoutes"));
