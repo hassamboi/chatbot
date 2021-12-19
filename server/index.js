@@ -9,6 +9,7 @@ const bp = require("body-parser");
 
 // express app
 const app = express();
+const http = require("http").createServer(app);
 
 // PORT to run the app on (default = 5000)
 const PORT = process.env.PORT || 5000;
@@ -20,13 +21,21 @@ const db = process.env.MONGO_URI;
 mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(result =>
-    app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
+    http.listen(PORT, () => console.log(`Server listening on PORT ${PORT}`))
   )
   .catch(err => console.log(err));
+
+const io = require("socket.io")(http, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
 
 // --- MIDDLEWARE ---
 // logger middleware
 app.use(morgan("dev"));
+
+// socket connection
 
 // body parser for url encoded data (form data)
 app.use(bp.json());
