@@ -20,9 +20,7 @@ const db = process.env.MONGO_URI;
 // connecting to db
 mongoose
   .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(result =>
-    http.listen(PORT, () => console.log(`Server listening on PORT ${PORT}`))
-  )
+  .then(result => http.listen(PORT, () => console.log(`Server listening on PORT ${PORT}`)))
   .catch(err => console.log(err));
 
 const io = require("socket.io")(http, {
