@@ -3,7 +3,15 @@ import { StyledBtn } from "../../assets/styles/ButtonElements";
 import { useForm } from "react-hook-form";
 import { Navigate, useNavigate } from "react-router-dom";
 
-import { Head, Form, Input, Formgroup, Linkspan, Footer, Para } from "./LoginElements";
+import {
+  Head,
+  Form,
+  Input,
+  Formgroup,
+  Linkspan,
+  Footer,
+  Para,
+} from "./LoginElements";
 import { Container, Wrapper } from "../../assets/styles";
 import { HandleImg, Logo } from "../HeroSection/HeroSectionElements";
 
@@ -44,7 +52,8 @@ export default function SignUp() {
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
-                      value: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+                      value:
+                        /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
                       message: "This is not a valid email address",
                     },
                   })}
@@ -78,7 +87,7 @@ export default function SignUp() {
                     required: "Password is required",
                     minLength: {
                       value: 7,
-                      message: "Password must be more than 4 characters",
+                      message: "Password must be atleast 7 characters",
                     },
                     maxLength: {
                       value: 15,

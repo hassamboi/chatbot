@@ -8,10 +8,8 @@ import {
   NavBtn,
   NavBtnLink,
   HandleLogo,
-  Navlogo,
 } from "./NavbarElements";
 
-import navlogo from "../../assets/images/navlogo.png";
 export default function Navbar({ isLoggedIn }) {
   return (
     <>
