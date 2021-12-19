@@ -7,7 +7,6 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bp = require("body-parser");
 const synonyms = require("synonyms");
-const fs = require("fs");
 
 // express app
 const app = express();
@@ -26,13 +25,6 @@ mongoose
     http.listen(PORT, () => console.log(`Server listening on PORT ${PORT}`))
   )
   .catch(err => console.log(err));
-
-// socket connection
-// const io = require("socket.io")(http, {
-//   cors: {
-//     origin: "http://localhost:3000",
-//   },
-// });
 
 // --- MIDDLEWARE ---
 // logger middleware
