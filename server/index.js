@@ -6,6 +6,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bp = require("body-parser");
+const synonyms = require("synonyms");
+const fs = require("fs");
 
 // express app
 const app = express();
@@ -25,17 +27,16 @@ mongoose
   )
   .catch(err => console.log(err));
 
-const io = require("socket.io")(http, {
-  cors: {
-    origin: "http://localhost:3000",
-  },
-});
+// socket connection
+// const io = require("socket.io")(http, {
+//   cors: {
+//     origin: "http://localhost:3000",
+//   },
+// });
 
 // --- MIDDLEWARE ---
 // logger middleware
 app.use(morgan("dev"));
-
-// socket connection
 
 // body parser for url encoded data (form data)
 app.use(bp.json());
@@ -46,3 +47,6 @@ app.use("/users", require("./routes/userRoutes"));
 
 // handle chat routes
 app.use("/chat", require("./routes/chatRoutes"));
+
+// TESTING API
+console.log(synonyms("hello"));
