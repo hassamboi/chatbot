@@ -8,10 +8,8 @@ import {
   NavBtn,
   NavBtnLink,
   HandleLogo,
-  Navlogo,
 } from "./NavbarElements";
 
-import navlogo from "../../assets/images/navlogo.png";
 export default function Navbar({ isLoggedIn }) {
   return (
     <>
@@ -21,15 +19,9 @@ export default function Navbar({ isLoggedIn }) {
         </NavLink>
         <Bars />
         <NavMenu>
-          <NavLink to="/about" activeStyle>
-            About
-          </NavLink>
-          <NavLink to="/services" activeStyle>
-            Services
-          </NavLink>
-          <NavLink to="help" activeStyle>
-            Help
-          </NavLink>
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/services">Services</NavLink>
+          <NavLink to="help">Help</NavLink>
 
           {/* {isLoggedIn && (
             <NavBtn>
