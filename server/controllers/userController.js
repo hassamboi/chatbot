@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 // controller to register a user
 const user_register = (req, res) => {
   const { name, email, password } = req.body;
+  console.log(req.body);
 
   // check if the email is already registered
   User.findOne({ email }).then(user => {
@@ -26,23 +27,18 @@ const user_register = (req, res) => {
 
         // register the user and return the data as response
         newUser.save().then(user => {
-          jwt.sign(
-            { id: user.id },
-            process.env.JWT_SECRET,
-            { expiresIn: 3600 },
-            (err, token) => {
-              if (err) throw err;
+          jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
+            if (err) throw err;
 
-              res.json({
-                token,
-                user: {
-                  id: user.id,
-                  name: user.name,
-                  email: user.email,
-                },
-              });
-            }
-          );
+            res.json({
+              token,
+              user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+              },
+            });
+          });
         });
       });
     });
@@ -62,23 +58,18 @@ const user_login = (req, res) => {
       if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
 
       // generate token and send payload with token as a response back
-      jwt.sign(
-        { id: user.id },
-        process.env.JWT_SECRET,
-        { expiresIn: 3600 },
-        (err, token) => {
-          if (err) throw err;
+      jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
+        if (err) throw err;
 
-          res.json({
-            token,
-            user: {
-              id: user.id,
-              name: user.name,
-              email: user.email,
-            },
-          });
-        }
-      );
+        res.json({
+          token,
+          user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+          },
+        });
+      });
     });
   });
 };

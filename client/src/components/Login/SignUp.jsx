@@ -3,37 +3,44 @@ import { StyledBtn } from "../../assets/styles/ButtonElements";
 import { useForm } from "react-hook-form";
 import { Navigate, useNavigate } from "react-router-dom";
 
-import {
-  Head,
-  Form,
-  Input,
-  Formgroup,
-  Linkspan,
-  Footer,
-  Para,
-} from "./LoginElements";
+import { Head, Form, Input, Formgroup, Linkspan, Footer, Para } from "./LoginElements";
 import { Container, Wrapper } from "../../assets/styles";
 import { HandleImg, Logo } from "../HeroSection/HeroSectionElements";
+//make another folder for base URLS or a state
 
 export default function SignUp() {
-  // const [isLoggedIn, setLoggedIn] = useState(false);
-  // const history = useHistory();
-  // const handleForm = () => {};
+  const baseURL = "http://localhost:5000";
   let navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = data => {
+
+
+  const onSubmit = async data => {
+ 
+    const response = await fetch(`${baseURL}/users/register`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(data),
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => console.log(json));
+
     navigate("/signin");
-    // console.log(data);
   };
-  console.log(errors);
+
+  // console.log(errors);
   const setEmail = () => {};
   const setPassword = () => {};
   const setName = () => {};
-
   // <Navbar isLoggedIn={isLoggedIn} />;
   return (
     <>
@@ -52,8 +59,7 @@ export default function SignUp() {
                   {...register("email", {
                     required: "Email is required",
                     pattern: {
-                      value:
-                        /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
+                      value: /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
                       message: "This is not a valid email address",
                     },
                   })}

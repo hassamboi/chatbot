@@ -5,10 +5,10 @@ import { useForm } from "react-hook-form";
 import { Container, Wrapper } from "../../assets/styles";
 import { Navigate, useNavigate } from "react-router-dom";
 import { HandleImg, Logo } from "../HeroSection/HeroSectionElements";
-
 import { Head, Form, Input, Formgroup, Linkspan, Footer, Para } from "./LoginElements";
 
 export default function Login() {
+  const baseURL = "http://localhost:5000";
   // const [isLoggedIn, setLoggedIn] = useState(true);
   let navigate = useNavigate();
   const {
@@ -16,8 +16,42 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = data => {
-    // if (Object.keys(errors).length === 0)
+
+  // const onSubmit = async (e, data) => {
+  //   e.preventDefault();
+  //   const chat = { }
+
+  //   try {
+  //     const response = await api.push("/users/register");
+  //   } catch (err) {
+  //     if (err.response) {
+  //       console.log(err.response.data);
+  //       console.log(err.response.status);
+  //       console.log(err.response.headers);
+  //     } else {
+  //       // will give errors that are not in 200 range
+  //       console.log(`Error: ${err.msg}`);
+  //     }
+  //   }
+  // };
+
+  const onSubmit =async data => {
+    
+    const response = await fetch(`${baseURL}/users/login`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(data),
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(json => console.log(json));
+
+    console.log(data);
     navigate("/");
   };
   const setEmail = () => {};

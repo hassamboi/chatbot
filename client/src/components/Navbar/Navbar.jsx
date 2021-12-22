@@ -1,14 +1,6 @@
 import React from "react";
 
-import {
-  Nav,
-  NavLink,
-  Bars,
-  NavMenu,
-  NavBtn,
-  NavBtnLink,
-  HandleLogo,
-} from "./NavbarElements";
+import { Nav, NavLink, NavMenu, NavBtn, NavBtnLink, HandleLogo } from "./NavbarElements";
 
 export default function Navbar({ isLoggedIn }) {
   return (
@@ -17,7 +9,7 @@ export default function Navbar({ isLoggedIn }) {
         <NavLink to="/">
           <HandleLogo>Chat Bot</HandleLogo>
         </NavLink>
-        <Bars />
+
         <NavMenu>
           <NavLink to="/about">About</NavLink>
           <NavLink to="/services">Services</NavLink>
