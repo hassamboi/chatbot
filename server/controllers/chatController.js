@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const responses = require("../db/responses.json");
 const synonyms = require("synonyms");
+const { match } = require("synonyms/dictionary");
 
 // controller to fetch messages
 const chat_index = (req, res) => {
@@ -15,7 +16,7 @@ const chat_index = (req, res) => {
 
 // controller to deal with client messages
 const chat_message_post = (req, res) => {
-  const keys = Object.keys(responses); // get the responses
+  const keys = Object.keys(responses); // get the keys from responses
   let message = req.body.msg; // extract the message sent in by the client
 
   message = sanitize_string(message); // remove articles and trim the message
@@ -63,7 +64,9 @@ const get_suitable_response = (keys, words) => {
   // calculate the best key to respond with
   keys.forEach(key => {
     words.forEach(word => {
-      if (key.includes(word)) currMatchCount++;
+      if (word.length > 1) {
+        if (key.includes(word)) currMatchCount++;
+      }
     });
     if (currMatchCount > highestMatchCount) {
       highestMatchCount = currMatchCount;
