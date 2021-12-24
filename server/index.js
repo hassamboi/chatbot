@@ -6,7 +6,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bp = require("body-parser");
-const synonyms = require("synonyms");
 
 // express app
 const app = express();
@@ -20,7 +19,7 @@ const db = process.env.MONGO_URI;
 
 // connecting to db
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(db)
   .then(result =>
     http.listen(PORT, () => console.log(`Server listening on PORT ${PORT}`))
   )
@@ -39,6 +38,3 @@ app.use("/users", require("./routes/userRoutes"));
 
 // handle chat routes
 app.use("/chat", require("./routes/chatRoutes"));
-
-// TESTING API
-console.log(synonyms("hello"));
