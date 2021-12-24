@@ -1,15 +1,17 @@
-import { useState } from "react";
 import logo from "../../assets/images/main.png";
 import { StyledBtn } from "../../assets/styles/ButtonElements";
 import { useForm } from "react-hook-form";
 import { Container, Wrapper } from "../../assets/styles";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { HandleImg, Logo } from "../HeroSection/HeroSectionElements";
 import { Head, Form, Input, Formgroup, Linkspan, Footer, Para } from "./LoginElements";
+import { useAuth } from "../../hooks/useAuth";
+
 
 export default function Login() {
+
+  const {loginUser} = useAuth();
   const baseURL = "http://localhost:5000";
-  // const [isLoggedIn, setLoggedIn] = useState(true);
   let navigate = useNavigate();
   const {
     register,
@@ -17,26 +19,8 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  // const onSubmit = async (e, data) => {
-  //   e.preventDefault();
-  //   const chat = { }
-
-  //   try {
-  //     const response = await api.push("/users/register");
-  //   } catch (err) {
-  //     if (err.response) {
-  //       console.log(err.response.data);
-  //       console.log(err.response.status);
-  //       console.log(err.response.headers);
-  //     } else {
-  //       // will give errors that are not in 200 range
-  //       console.log(`Error: ${err.msg}`);
-  //     }
-  //   }
-  // };
-
-  const onSubmit =async data => {
-    
+  const onSubmit = async data => {
+    //sending form data to login
     const response = await fetch(`${baseURL}/users/login`, {
       method: "POST",
       mode: "cors",
@@ -49,9 +33,11 @@ export default function Login() {
       .then(response => {
         return response.json();
       })
-      .then(json => console.log(json));
+      .then( userData =>{
+        loginUser(userData);
+      } );
+    
 
-    console.log(data);
     navigate("/");
   };
   const setEmail = () => {};
