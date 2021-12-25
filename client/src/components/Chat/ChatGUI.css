@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 35rem;
+  max-height: 35rem;
   margin: 25px 10px;
   /* border: 2px solid #00c6bd; */
   overflow: hidden;
@@ -37,7 +37,7 @@
   background: #ddd;
 }
 .msger-chat::-webkit-scrollbar-thumb {
-  background: #bdbdbd;
+  background: #00c6bd;
 }
 .msg {
   display: flex;
