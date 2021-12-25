@@ -1,8 +1,10 @@
 import { Head, Para, Subs, CapsLetter, Logo, HandleImg } from "./HeroSectionElements";
 import logo from "../../assets/images/main.png";
 import { StyledBtn } from "../../assets/styles/ButtonElements";
-
+import { useAuth } from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
 export default function HeroSection() {
+  const { token } = useAuth();
   return (
     <>
       <div>
@@ -11,11 +13,13 @@ export default function HeroSection() {
         </Head>
         <Subs>The only human that actually listens</Subs>
         <Para>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus harum eius delectus
-          aut iusto id quos hic fuga minus similique nihil natus, porro, tempora, eos nisi illo! In,
-          facere Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus harum eius delectus aut iusto id quos hic fuga minus similique nihil natus, porro, tempora, eos nisi illo! In, facere
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </Para>
-        <StyledBtn zero>Start Chatting</StyledBtn>
+
+        <Link to={token ? "/chat" : "/signin"}>
+          <StyledBtn zero>Start Chatting</StyledBtn>
+        </Link>
       </div>
       <HandleImg>
         <Logo src={logo} />

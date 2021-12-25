@@ -6,11 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { HandleImg, Logo } from "../HeroSection/HeroSectionElements";
 import { Head, Form, Input, Formgroup, Linkspan, Footer, Para } from "./LoginElements";
 import { useAuth } from "../../hooks/useAuth";
-
+import api from "../../api/posts";
 
 export default function Login() {
-
-  const {loginUser} = useAuth();
+  const { loginUser } = useAuth();
   const baseURL = "http://localhost:5000";
   let navigate = useNavigate();
   const {
@@ -19,31 +18,18 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async data => {
-    //sending form data to login
-    const response = await fetch(`${baseURL}/users/login`, {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify(data),
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then( userData =>{
-        loginUser(userData);
-      } );
-    
-
+  const onSubmit = async formData => {
+    try {
+      const response = await api.post("/users/login", formData).then(userData => {
+        console.log(userData.data);
+        loginUser(userData.data);
+      });
+    } catch (err) {
+      console.log(`Error : ${err.message}`);
+    }
     navigate("/");
   };
-  const setEmail = () => {};
-  const setPassword = () => {};
 
-  // <Navbar isLoggedIn={isLoggedIn} />;
   return (
     <Container>
       <Wrapper>
@@ -57,7 +43,6 @@ export default function Login() {
                 type="email"
                 name="email"
                 placeholder="Enter your email"
-                onChange={e => setEmail(e.target.value)}
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
@@ -75,7 +60,6 @@ export default function Login() {
                 type="password"
                 name="password"
                 placeholder="Enter your password"
-                onChange={e => setPassword(e.target.value)}
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
@@ -92,7 +76,6 @@ export default function Login() {
             </Formgroup>
 
             <StyledBtn>Log in</StyledBtn>
-            {/* <Styledbtn></Styledbtn> */}
           </Form>
 
           <Footer>

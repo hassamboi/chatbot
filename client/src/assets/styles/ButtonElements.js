@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const NavBtn = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: 1.5rem;
+`;
 export const StyledBtn = styled.button`
   border-radius: 0.25rem;
   background: #F9F871;

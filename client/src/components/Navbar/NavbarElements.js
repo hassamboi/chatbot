@@ -18,9 +18,6 @@ export const NavLink = styled(Link)`
   text-decoration: none;
   padding: 0 1rem;
   cursor: pointer;
-  &.active {
-    color: #ffff00;
-  }
 `;
 
 export const NavMenu = styled.div`

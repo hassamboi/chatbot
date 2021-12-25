@@ -1,15 +1,13 @@
 import logo from "../../assets/images/main.png";
 import { StyledBtn } from "../../assets/styles/ButtonElements";
 import { useForm } from "react-hook-form";
-import { Navigate, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import { Head, Form, Input, Formgroup, Linkspan, Footer, Para } from "./LoginElements";
 import { Container, Wrapper } from "../../assets/styles";
 import { HandleImg, Logo } from "../HeroSection/HeroSectionElements";
-//make another folder for base URLS or a state
+import api from "../../api/posts";
 
 export default function SignUp() {
-  const baseURL = "http://localhost:5000";
   let navigate = useNavigate();
   const {
     register,
@@ -17,31 +15,15 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
 
-
-  const onSubmit = async data => {
- 
-    const response = await fetch(`${baseURL}/users/register`, {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify(data),
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(json => console.log(json));
-
+  const onSubmit = async formData => {
+    try {
+      const response = await api.post("/users/register", formData);
+    } catch (err) {
+      console.log(`Error : ${err.message}`);
+    }
     navigate("/signin");
   };
 
-  // console.log(errors);
-  const setEmail = () => {};
-  const setPassword = () => {};
-  const setName = () => {};
-  // <Navbar isLoggedIn={isLoggedIn} />;
   return (
     <>
       <Container>
@@ -104,8 +86,6 @@ export default function SignUp() {
                 <Para>{errors.password?.message}</Para>
               </Formgroup>
               <StyledBtn>Register</StyledBtn>
-
-              {/* <Styledbtn></Styledbtn> */}
             </Form>
 
             <Footer>
