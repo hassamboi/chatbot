@@ -11,7 +11,6 @@ export default function Navbar() {
         <HandleLogo>Chat Bot</HandleLogo>
       </NavLink>
       <NavMenu>
-        {token && <NavLink to="/chat">Chat</NavLink>}
         <NavBtn>
           {token && (
             <NavBtnLink

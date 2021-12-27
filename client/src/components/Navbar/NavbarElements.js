@@ -7,7 +7,6 @@ export const Nav = styled.div`
   display: flex;
   justify-content: space-between;
   z-index: 10;
-  /* justify-content: flex-start; */
 `;
 
 export const NavLink = styled(Link)`
@@ -24,18 +23,12 @@ export const NavMenu = styled.div`
   display: flex;
   align-items: center;
   margin-right: -1.5px;
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
 `;
 
 export const NavBtn = styled.div`
   display: flex;
   align-items: center;
   margin-right: 1.5rem;
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
 `;
 
 export const NavBtnLink = styled(Link)`
@@ -49,7 +42,6 @@ export const NavBtnLink = styled(Link)`
   font-weight: bold;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  /* Second Nav */
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   border: 1rem;

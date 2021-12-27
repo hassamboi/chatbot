@@ -23,11 +23,11 @@ export default function Login() {
       const response = await api.post("/users/login", formData).then(userData => {
         console.log(userData.data);
         loginUser(userData.data);
+        navigate("/");
       });
     } catch (err) {
       console.log(`Error : ${err.message}`);
     }
-    navigate("/");
   };
 
   return (

@@ -6,6 +6,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bp = require("body-parser");
+const jwt = require("jsonwebtoken");
 
 // express app
 const app = express();
@@ -25,8 +26,26 @@ mongoose
 
 const io = require("socket.io")(http, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3000/",
   },
+});
+
+io.on("connection", socket => {
+  console.log("user is connected");
+
+  //welcome current user
+  socket.emit("message", "Welcome to chat bot");
+  //listen for chat
+  socket.on("chatMessage", msg => {
+    console.log(msg);
+    const decoded = jwt.verify(msg.token, process.env.JWT_SECRET);
+    const userId = decoded.id;
+    console.log(decoded);
+    socket.emit("message", msg);
+  });
+  socket.on("disconnect", () => {
+    socket.emit("message", "user has left");
+  });
 });
 
 // --- MIDDLEWARE ---

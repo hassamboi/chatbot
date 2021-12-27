@@ -4,7 +4,7 @@ import { StyledBtn } from "../../assets/styles/ButtonElements";
 import { useAuth } from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 export default function HeroSection() {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   return (
     <>
       <div>
@@ -18,7 +18,9 @@ export default function HeroSection() {
         </Para>
 
         <Link to={token ? "/chat" : "/signin"}>
-          <StyledBtn zero>Start Chatting</StyledBtn>
+          <StyledBtn zero onClick={() => {}}>
+            Start Chatting
+          </StyledBtn>
         </Link>
       </div>
       <HandleImg>
