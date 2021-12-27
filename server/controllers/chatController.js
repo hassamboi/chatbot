@@ -1,7 +1,4 @@
 const User = require("../models/User");
-const responses = require("../db/responses.json");
-const synonyms = require("synonyms");
-const { match } = require("synonyms/dictionary");
 
 // controller to fetch messages
 const chat_index = (req, res) => {

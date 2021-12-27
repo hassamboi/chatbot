@@ -5,91 +5,65 @@ import { useForm } from "react-hook-form";
 import { Para } from "../Login/LoginElements";
 import { io } from "socket.io-client";
 import { useAuth } from "../../hooks/useAuth";
+import api from "../../api/posts";
+import MessageList from "../MessageList";
 const socket = io("http://localhost:5000");
 export default function ChatGUI() {
-  const { token } = useAuth();
-  const { passData, setpassData } = useState("");
+  const [messages, setMessages] = useState([]);
+  const { token, user } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
-  useEffect(() => {
-    socket.on("message", message => {
-      console.log(message);
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView();
+  };
+  const getMessages = async () => {
+    const response = await api.get("/chat", {
+      headers: {
+        "x-auth-token": token,
+      },
     });
+    // console.log(response.data.messages);
+    setMessages(response.data.messages);
+  };
+  useEffect(() => {
+    // runs once to fetch old chat
+    getMessages();
+    console.log("mein hon");
     scrollToBottom();
-  }, []);
+  }, [messagesEndRef]);
+
+  useEffect(() => {
+    //runs everytime to update chat
+    socket.on("message", msg => {
+      getMessages();
+      console.log(msg);
+      scrollToBottom();
+    });
+  }, [messagesEndRef]);
 
   const onSubmit = data => {
-    //emitting to the server
-    // setpassData(data);
+    reset({ text: "" });
     console.log(data);
     const userdata = { ...data, token };
     socket.emit("chatMessage", userdata);
   };
 
-  const messagesEndRef = useRef(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView();
-  };
-
-  const renderChat = passData => {
-    return (
-      <>
-        <div className="msg right-msg">
-          <div className="msg-img" />
-          <div className="msg-bubble">
-            <div className="msg-info">
-              <div className="msg-info-name">Han</div>
-              <div className="msg-info-time">12.30</div>
-            </div>
-            <div className="msg-text">{passData}</div>
-          </div>
-        </div>
-      </>
-    );
-  };
-
   return (
     <Fragment>
       <section className="msger">
-        <header className="msger-header"></header>
+        <header className="msger-header">
+          {" "}
+          <Para>{errors.text?.message}</Para>
+        </header>
 
         <main className="msger-chat">
-          <div className="msg left-msg">
-            <div className="msg-img" />
-            <div className="msg-bubble">
-              <div className="msg-info">
-                <div className="msg-info-name">BOT</div>
-                <div className="msg-info-time">12:45</div>
-              </div>
-              <div className="msg-text">Hi, welcome to the Chat Bot! Go ahead and send me a message. </div>
-            </div>
-          </div>
-          {renderChat()}
-          {/* <div className="msg left-msg">
-            <div className="msg-img" />
-            <div className="msg-bubble">
-              <div className="msg-info">
-                <div className="msg-info-name">BOT</div>
-                <div className="msg-info-time">12:45</div>
-              </div>
-              <div className="msg-text">Hi, welcome to SimpleChat! Go ahead and send me a message. </div>
-            </div>
-          </div>
-          <div className="msg right-msg">
-            <div className="msg-img" />
-            <div className="msg-bubble">
-              <div className="msg-info">
-                <div className="msg-info-name">Sajad</div>
-                <div className="msg-info-time">12:46</div>
-              </div>
-              <div className="msg-text">You can change your name in JS section!</div>
-            </div>
-          </div> */}
+          {messages && <MessageList messages={messages} />}
 
           <div ref={messagesEndRef} />
         </main>
@@ -105,6 +79,10 @@ export default function ChatGUI() {
                 value: 2,
                 message: "Message is too short",
               },
+              maxLength: {
+                value: 100,
+                message: "Message is too long",
+              },
             })}
           />
 
@@ -112,7 +90,6 @@ export default function ChatGUI() {
             Send
           </button>
         </form>
-        {/* <Para>{errors.text?.message}</Para> */}
       </section>
     </Fragment>
   );

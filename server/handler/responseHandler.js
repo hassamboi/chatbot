@@ -1,3 +1,6 @@
+const responses = require("../db/responses.json");
+const synonyms = require("synonyms");
+
 // controller to deal with client messages
 const get_response = message => {
   const keys = Object.keys(responses); // get the keys from responses
@@ -11,7 +14,7 @@ const get_response = message => {
   // fetch synonyms for the each word in the array and concat it with the array
   wordArray.forEach(word => {
     const wordSynonym = synonyms(word);
-    console.log("SYNONYMS -> ", wordSynonym);
+    // console.log("SYNONYMS -> ", wordSynonym);
     if (wordSynonym) {
       if (wordSynonym.n) wordArray = wordArray.concat(wordSynonym.n);
       if (wordSynonym.v) wordArray = wordArray.concat(wordSynonym.v);
@@ -20,7 +23,7 @@ const get_response = message => {
     }
   });
 
-  console.log("FINAL WORD ARRAY -> ", wordArray);
+  // console.log("FINAL WORD ARRAY -> ", wordArray);
   const matchingKey = get_matching_key(keys, wordArray);
 
   if (!matchingKey) return "Try something else";
@@ -66,4 +69,4 @@ const sanitize_string = text => {
   return result.trim().toLowerCase();
 };
 
-export { get_response, get_matching_key, sanitize_string };
+module.exports = { get_response, get_matching_key, sanitize_string };

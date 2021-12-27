@@ -58,7 +58,7 @@ const user_login = (req, res) => {
       if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
 
       // generate token and send payload with token as a response back
-      jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
+      jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: 36000 }, (err, token) => {
         if (err) throw err;
 
         res.json({

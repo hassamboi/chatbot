@@ -61,6 +61,7 @@
   padding: 15px;
   border-radius: 15px;
   background: var(--left-msg-bg);
+  word-wrap: break-word;
 }
 .msg-info {
   display: flex;

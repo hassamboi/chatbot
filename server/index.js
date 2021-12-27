@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bp = require("body-parser");
 const jwt = require("jsonwebtoken");
+const User = require("./models/User");
 
 // importing functions to handle response sending
 const { get_response, get_matching_key, sanitize_string } = require("./handler/responseHandler");
@@ -40,11 +41,20 @@ io.on("connection", socket => {
   socket.emit("message", "Welcome to chat bot");
   //listen for chat
   socket.on("chatMessage", msg => {
-    console.log(msg);
+    // console.log(msg);
     const decoded = jwt.verify(msg.token, process.env.JWT_SECRET);
     const userId = decoded.id;
-    console.log(decoded);
-    socket.emit("message", msg);
+    const response = get_response(msg.text);
+    // console.log(decoded);
+    const messageToAppend = { text: msg.text, response };
+    User.findOneAndUpdate({ _id: userId }, { $push: { messages: messageToAppend } }, function (error, success) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(success);
+      }
+    });
+    socket.emit("message", response);
   });
   socket.on("disconnect", () => {
     socket.emit("message", "user has left");
