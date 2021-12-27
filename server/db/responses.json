@@ -6,7 +6,7 @@
   "tell,riddle": ["Forwards I am heavy. Backwards I am not. What am I?... Ton"],
   "Good,morning": ["Good morning lovely human being"],
   "Tell,something": ["Something 😊"],
-  "Something,nice": ["It's time to start living the life you've imagined"],
+  "Tell,Something,nice": ["It's time to start living the life you've imagined"],
   "I,love": ["love you more"],
   "cute": ["I'm blushing"],
   "hobby": ["help humans"],
@@ -25,7 +25,7 @@
   "my name,is": ["it's a nice name"],
   "your,personality": ["I'm cool"],
   "where you,live": ["internet it is"],
-  "favourite,song": ["your body next to me, it's just a memory."],
+  "favourite,song": ["After Hours by TheWeeknd."],
   "hello,hi,hey,you": ["Hey! how are you doing?"],
   "how,you,doing?": ["As good as the weather outside"],
   "fine,good,great": ["Love to hear that 😊"],
@@ -33,7 +33,7 @@
   "favourite,singer": ["My favourite singer is Abel Tesfaye a.k.a TheWeeknd"],
   "how,weather": ["Seems about right"],
   "lucky,feeling,happy": ["Good for you! 😊"],
-  "animal": ["I love killer whales", "I love emporer penguins"],
+  "favourite,animal?": ["I love killer whales", "I love emporer penguins"],
   "roast": [
     "You're so stupid you couldn't pour piss out of a boot if the directions were written on the heel"
   ],

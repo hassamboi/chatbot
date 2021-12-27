@@ -7,6 +7,13 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bp = require("body-parser");
 
+// importing functions to handle response sending
+const {
+  get_response,
+  get_matching_key,
+  sanitize_string,
+} = require("./handler/responseHandler");
+
 // express app
 const app = express();
 const http = require("http").createServer(app);
