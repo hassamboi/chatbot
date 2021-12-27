@@ -7,6 +7,9 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bp = require("body-parser");
 
+// importing functions to handle response sending
+const { get_response, get_matching_key, sanitize_string } = require("./handler/responseHandler");
+
 // express app
 const app = express();
 const http = require("http").createServer(app);
@@ -19,21 +22,13 @@ const db = process.env.MONGO_URI;
 
 // connecting to db
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(db)
   .then(result => http.listen(PORT, () => console.log(`Server listening on PORT ${PORT}`)))
   .catch(err => console.log(err));
-
-const io = require("socket.io")(http, {
-  cors: {
-    origin: "http://localhost:3000",
-  },
-});
 
 // --- MIDDLEWARE ---
 // logger middleware
 app.use(morgan("dev"));
-
-// socket connection
 
 // body parser for url encoded data (form data)
 app.use(bp.json());
