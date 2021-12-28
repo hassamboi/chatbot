@@ -32,5 +32,8 @@ export const Logo = styled.img`
 export const HandleImg = styled.div`
   max-width: 35rem;
   text-align: center;
+  @media (max-width: 980px) {
+    display: none;
+  }
   /* margin-left: 8rem; */
 `;

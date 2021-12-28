@@ -2,12 +2,12 @@ import logo from "../../assets/images/main.png";
 import { StyledBtn } from "../../assets/styles/ButtonElements";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { Head, Form, Input, Formgroup, Linkspan, Footer, Para } from "./LoginElements";
+import { Head, Form, Input, Formgroup, Linkspan, Footer, Para } from "./FormElements";
 import { Container, Wrapper } from "../../assets/styles";
 import { HandleImg, Logo } from "../HeroSection/HeroSectionElements";
 import api from "../../api/posts";
 
-export default function SignUp() {
+export default function SignUp({ setisLoggedIn }) {
   let navigate = useNavigate();
   const {
     register,
@@ -92,7 +92,7 @@ export default function SignUp() {
               Already have an account?{" "}
               <Linkspan
                 onClick={() => {
-                  navigate("/signin");
+                  setisLoggedIn(true);
                 }}
               >
                 Sign in

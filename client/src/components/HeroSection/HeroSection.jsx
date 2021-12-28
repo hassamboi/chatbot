@@ -1,10 +1,10 @@
-import { Head, Para, Subs, CapsLetter, Logo, HandleImg } from "./HeroSectionElements";
+import { Head, Para, Subs, CapsLetter, Logo, HandleImg, MediaHandler } from "./HeroSectionElements";
 import logo from "../../assets/images/main.png";
 import { StyledBtn } from "../../assets/styles/ButtonElements";
 import { useAuth } from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 export default function HeroSection() {
-  const { token, user } = useAuth();
+  const { token } = useAuth();
   return (
     <>
       <div>
@@ -17,7 +17,7 @@ export default function HeroSection() {
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </Para>
 
-        <Link to={token ? "/chat" : "/signin"}>
+        <Link to={token ? "/chat" : "/register"}>
           <StyledBtn zero onClick={() => {}}>
             Start Chatting
           </StyledBtn>

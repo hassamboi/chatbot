@@ -15,4 +15,7 @@ export const Wrapper = styled.div`
   margin: auto;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 980px) {
+    display: block;
+  }
 `;

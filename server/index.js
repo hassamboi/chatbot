@@ -47,11 +47,12 @@ io.on("connection", socket => {
     const response = get_response(msg.text);
     // console.log(decoded);
     const messageToAppend = { text: msg.text, response };
+    //updating the db
     User.findOneAndUpdate({ _id: userId }, { $push: { messages: messageToAppend } }, function (error, success) {
       if (error) {
-        console.log(error);
+        console.log("error");
       } else {
-        console.log(success);
+        console.log("success");
       }
     });
     socket.emit("message", response);

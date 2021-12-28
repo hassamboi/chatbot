@@ -3,10 +3,9 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Landing from "./pages/Landing";
 import Chat from "./pages/Chat";
-import { Login, SignUp } from "./components/Login";
 import { useAuth } from "./hooks/useAuth";
+import Register from "./pages/Register";
 function App() {
-  // const checkToken = localStorage.getItem("token");
   const { token } = useAuth();
 
   return (
@@ -15,8 +14,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Landing />} />
-          {!token && <Route path="/signin" element={<Login />} />}
-          {!token && <Route path="/signup" element={<SignUp />} />}
+          {!token && <Route path="/register" element={<Register />} />}
           {token && <Route path="/chat" element={<Chat />} />}
           <Route path="*" element={<Landing />} />
         </Routes>

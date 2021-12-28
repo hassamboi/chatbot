@@ -4,11 +4,11 @@ import { useForm } from "react-hook-form";
 import { Container, Wrapper } from "../../assets/styles";
 import { useNavigate } from "react-router-dom";
 import { HandleImg, Logo } from "../HeroSection/HeroSectionElements";
-import { Head, Form, Input, Formgroup, Linkspan, Footer, Para } from "./LoginElements";
+import { Head, Form, Input, Formgroup, Linkspan, Footer, Para } from "./FormElements";
 import { useAuth } from "../../hooks/useAuth";
 import api from "../../api/posts";
 
-export default function Login() {
+export default function Login({ setisLoggedIn }) {
   const { loginUser } = useAuth();
   const baseURL = "http://localhost:5000";
   let navigate = useNavigate();
@@ -82,7 +82,7 @@ export default function Login() {
             Don't have an account?{" "}
             <Linkspan
               onClick={() => {
-                navigate("/signup");
+                setisLoggedIn(false);
               }}
             >
               Sign up

@@ -27,6 +27,8 @@
 .msger-chat {
   flex: 1;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
   padding: 10px;
 }
 .msger-chat::-webkit-scrollbar {
@@ -59,6 +61,7 @@
 .msg-bubble {
   max-width: 450px;
   padding: 15px;
+  margin-bottom: 1rem;
   border-radius: 15px;
   background: var(--left-msg-bg);
   word-wrap: break-word;

@@ -22,7 +22,7 @@ export default function Navbar() {
               Log out
             </NavBtnLink>
           )}
-          {!token && <NavBtnLink to="/signin">Sign in</NavBtnLink>}
+          {!token && <NavBtnLink to="/register">Sign in</NavBtnLink>}
         </NavBtn>
       </NavMenu>
     </Nav>
