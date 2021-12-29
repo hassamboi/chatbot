@@ -60,7 +60,11 @@ export default function ChatGUI() {
             value={inputMessage}
           />
 
-          <button type="submit" className="msger-send-btn">
+          <button
+            type="submit"
+            className="msger-send-btn"
+            disabled={!inputMessage}
+          >
             Send
           </button>
         </form>
