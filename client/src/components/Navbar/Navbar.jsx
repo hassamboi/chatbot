@@ -4,7 +4,6 @@ import { Nav, NavLink, NavMenu, NavBtn, NavBtnLink, HandleLogo } from "./NavbarE
 
 export default function Navbar() {
   const { logoutUser, token } = useAuth();
-  // const token = localStorage.getItem("token");
   return (
     <Nav>
       <NavLink to="/">

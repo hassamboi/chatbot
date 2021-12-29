@@ -10,7 +10,6 @@ import api from "../../api/posts";
 
 export default function Login({ setisLoggedIn }) {
   const { loginUser } = useAuth();
-  const baseURL = "http://localhost:5000";
   let navigate = useNavigate();
   const {
     register,

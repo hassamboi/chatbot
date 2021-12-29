@@ -1,6 +1,6 @@
 import "./ChatGUI.css";
 import React, { Fragment, useState } from "react";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Para } from "../Forms/FormElements";
 import { io } from "socket.io-client";
@@ -10,7 +10,8 @@ import MessageList from "../MessageList";
 let socket;
 export default function ChatGUI() {
   const [messages, setMessages] = useState([]);
-  const { token, user } = useAuth();
+  const [render, setRender] = useState("");
+  const { token } = useAuth();
   const {
     register,
     handleSubmit,
@@ -28,13 +29,12 @@ export default function ChatGUI() {
   };
 
   useEffect(() => {
-    //runs everytime to update chat
     const controller = new AbortController();
     socket = io("http://localhost:5000");
     getMessages();
-    socket.on("message", msg => {
+    socket.on("response", response => {
+      setRender(...render, "screw");
       getMessages();
-      console.log(msg);
     });
 
     return () => {
@@ -43,10 +43,10 @@ export default function ChatGUI() {
   }, []);
 
   const onSubmit = async data => {
-    reset({ text: "" });
-    console.log(data);
+    setRender("");
     const userdata = { ...data, token };
-    socket.emit("chatMessage", userdata);
+    socket.emit("message", userdata);
+    reset({ text: "" });
   };
 
   return (

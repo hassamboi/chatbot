@@ -12,10 +12,7 @@ export default function HeroSection() {
           Welcome to the <CapsLetter>Chat Bot.</CapsLetter>
         </Head>
         <Subs>The only human that actually listens</Subs>
-        <Para>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus harum eius delectus aut iusto id quos hic fuga minus similique nihil natus, porro, tempora, eos nisi illo! In, facere
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        </Para>
+        <Para>A chatbot is software that simulates human-like conversations with users via text messages on chat. Its key task is to help users by providing answers to their questions.</Para>
 
         <Link to={token ? "/chat" : "/register"}>
           <StyledBtn zero onClick={() => {}}>

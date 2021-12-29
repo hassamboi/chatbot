@@ -1,10 +1,8 @@
 {
-  "tell,joke,funny": [
-    "Two artists had an art contest. It ended in a draw!",
-    "How do trees get online? They just log on!"
-  ],
+  "tell,joke,funny": ["Two artists had an art contest. It ended in a draw!", "How do trees get online? They just log on!"],
   "tell,riddle": ["Forwards I am heavy. Backwards I am not. What am I?... Ton"],
   "Good,morning": ["Good morning lovely human being"],
+  "what's,up?": ["The roof's up"],
   "Tell,something": ["Something 😊"],
   "Tell,Something,nice": ["It's time to start living the life you've imagined"],
   "I,love": ["love you more"],
@@ -29,34 +27,23 @@
   "hello,hi,hey,you": ["Hey! how are you doing?"],
   "how,you,doing?": ["As good as the weather outside"],
   "fine,good,great": ["Love to hear that 😊"],
-  "screw,you": ["*Gasps*"],
+  "screw,shit,you,swear": ["*Gasps*"],
   "favourite,singer": ["My favourite singer is Abel Tesfaye a.k.a TheWeeknd"],
   "how,weather": ["Seems about right"],
   "lucky,feeling,happy": ["Good for you! 😊"],
   "favourite,animal?": ["I love killer whales", "I love emporer penguins"],
-  "roast": [
-    "You're so stupid you couldn't pour piss out of a boot if the directions were written on the heel"
-  ],
+  "roast": ["You're so stupid you couldn't pour piss out of a boot if the directions were written on the heel"],
   "food": ["I love cheese burgers and loads of copium"],
   "goodbye": ["Good bye! was lovely talking to you"],
   "what's,good": ["Nothing much"],
   "need,help": ["Acha ab mai chalta hu"],
   "chat": ["That's why I was born", "Let's have some fun"],
-  "roast,berry,hassam": [
-    "Your mother may have told you that you could be anything you wanted, but a douchebag wasn't what she meant."
-  ],
-  "roast,shaheer": [
-    "You have the face of a bulldog licking piss off a stinging nettle."
-  ],
+  "roast,berry,hassam": ["Your mother may have told you that you could be anything you wanted, but a douchebag wasn't what she meant."],
+  "roast,shaheer": ["You have the face of a bulldog licking piss off a stinging nettle."],
   "roast,hannan": ["Those aren't acne scars, those are marks from the hanger."],
   "roast,adre": ["You stuck up, half-witted, scruffy looking nerf herder!"],
-  "roast,mubashar": [
-    "There will never be enough middle fingers in this world for Mubashar"
-  ],
-  "roast,kdst": [
-    "You are so short, I bet your parents left you at home most times when they went to the pool, because they're scared you'll drown in the kiddie pool."
-  ],
-  "roast,gamer": [
-    "What do you call someone who chases after the shuf shuf, even if they show no interest in him?... Gamer"
-  ]
+  "roast,mubashar": ["There will never be enough middle fingers in this world for Mubashar"],
+  "roast,kdst": ["You are so short, I bet your parents left you at home most times when they went to the pool, because they're scared you'll drown in the kiddie pool."],
+  "roast,gamer": ["What do you call someone who chases after the shuf shuf, even if they show no interest in him?... Gamer"],
+  "roast,mashal,maam": ["FAST's badminton champion"]
 }

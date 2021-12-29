@@ -25,7 +25,6 @@ export const CapsLetter = styled.span`
 `;
 
 export const Logo = styled.img`
-  /* max-width: 35rem; */
   width: 100%;
 `;
 
@@ -35,5 +34,4 @@ export const HandleImg = styled.div`
   @media (max-width: 980px) {
     display: none;
   }
-  /* margin-left: 8rem; */
 `;

@@ -8,12 +8,13 @@ const morgan = require("morgan");
 const bp = require("body-parser");
 const jwt = require("jsonwebtoken");
 const User = require("./models/User");
-
+const cors = require("cors");
 // importing functions to handle response sending
 const { get_response, get_matching_key, sanitize_string } = require("./handler/responseHandler");
 
 // express app
 const app = express();
+app.use(cors());
 const http = require("http").createServer(app);
 
 // PORT to run the app on (default = 5000)
@@ -30,7 +31,7 @@ mongoose
 
 const io = require("socket.io")(http, {
   cors: {
-    origin: "http://localhost:3000/",
+    origin: "http://localhost:3000",
   },
 });
 
@@ -40,7 +41,7 @@ io.on("connection", socket => {
   //welcome current user
   socket.emit("message", "Welcome to chat bot");
   //listen for chat
-  socket.on("chatMessage", msg => {
+  socket.on("message", msg => {
     // console.log(msg);
     const decoded = jwt.verify(msg.token, process.env.JWT_SECRET);
     const userId = decoded.id;
@@ -55,7 +56,7 @@ io.on("connection", socket => {
         console.log("success");
       }
     });
-    socket.emit("message", response);
+    socket.emit("response", response);
   });
   socket.on("disconnect", () => {
     socket.emit("message", "user has left");
